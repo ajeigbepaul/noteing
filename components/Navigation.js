@@ -17,16 +17,17 @@ const Navigation = () => {
     },[])
   return (
     <nav className="w-full p-4 bg-[#E6E6FA] flex items-center justify-between">
-      <Image src="/notelogo3.png" width={45} height={20} />
+      <Image src="/notelogo3.png" width={45} height={20} alt="logo"/>
       <div>Note-ing</div>
       {session?.user ? (
         <div className="flex items-center cursor-pointer space-x-2 ">
           <div className="rounded-full border border-pink-400 w-7 h-7 flex items-center">
             <Image
-              src="/profilepics.jpg"
+              src={session?.user.image}
               width={24}
               height={24}
               className="rounded-3xl w-7 h-7 object-cover"
+              alt="profileimage"
             />
           </div>
           {/* <span className="text-sm px-1 hidden sm:flex">
