@@ -20,6 +20,7 @@ export default function Home() {
   const handleNote = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+    console.log(input)
     try {
       const response = await fetch("/api/note/new", {
         method: "POST",

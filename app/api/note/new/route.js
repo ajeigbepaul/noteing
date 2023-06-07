@@ -2,7 +2,7 @@ import { connectToDB } from "../../../../utils/database";
 import Note from "../../../../models/note";
 export const POST = async (req, res) => {
   const { userId, input } = await req.json();
-
+console.log(input)
   try {
     connectToDB();
     const newNote = new Note({
