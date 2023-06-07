@@ -7,6 +7,9 @@ const nextConfig = {
   images: {
     domains: ["lh3.googleusercontent.com"],
   },
+  // env:{
+  // DB_URL:process.env.MONGODB_URI
+  // },
   webpack(config) {
     config.experiments = {
       ...config.experiments,

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { BsSendCheck } from "react-icons/bs";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useSession } from "next-auth/react";
-import NoteFeed from '../components/NoteFeed'
+import NoteFeed from "../components/NoteFeed";
 export default function Home() {
   const { data: session } = useSession();
   const [submitting, setSubmitting] = useState(false);
@@ -12,6 +12,7 @@ export default function Home() {
     margin: "0 auto",
   };
   const [notes, setNotes] = useState([]);
+  const [initialUi, setInitialUi] = useState([]);
   const [input, setInput] = useState("");
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -30,29 +31,45 @@ export default function Home() {
       if (response.ok) {
         // Change this to hot toast.
         console.log("note created!!!");
+        fetchNotes()
+        setInput("");
       }
-      // setNote([...note, input]);
-      setInput("");
+      //  setNotes([...notes, input]);
+      //  console.log(notes)
+      
     } catch (error) {
       console.log(error);
     } finally {
       setSubmitting(false);
     }
   };
-  useEffect(()=>{
-   const fetchNotes = async ()=>{
-    const response = await fetch('/api/note')
+  const fetchNotes = async () => {
+    const response = await fetch("/api/note");
     const data = await response.json();
-    setNotes(data)
-   }
-   fetchNotes()
-  },[])
+    setNotes(data);
+  };
+  useEffect(() => {
+    
+    fetchNotes();
+  }, []);
   return (
     <main className="h-screen py-4 bg-gradient-to-br from-[#E6E6FA] to bg-white flex flex-col overflow-x-hidden">
+      {notes.length === 0 && <span className="px-10">No Note in the database</span>}
       <div className="w-full overflow-x-scroll scrollbar-track-gray-400/20 scrollbar-thumb-[#FF00FF]/80 scrollbar-thin h-screen snap-x snap-mandatory bg-white max-h-[350px] flex space-x-2">
-        {notes.map((note) => (
-          <NoteFeed key={note._id} note={note}/>
-        ))}
+        {notes.map((note) =>
+          notes.length > 0 ? (
+            <NoteFeed
+              key={note._id}
+              note={note}
+              setNotes={setNotes}
+              notes={notes}
+            />
+          ) : (
+            <span className="bg-red-400">
+              {notes.length === 0 && "No Note in the database"}
+            </span>
+          )
+        )}
       </div>
       <div className="w-full max-w-3xl mx-auto bg-fuchsia-500 shadow-lg flex items-center rounded-lg mt-4">
         <form className="w-full rounded-md">
