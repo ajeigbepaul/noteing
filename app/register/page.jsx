@@ -1,7 +1,7 @@
 'use client'
 import {useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
-const page = () => {
+const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -87,4 +87,4 @@ const page = () => {
   );
 }
 
-export default page
+export default Register

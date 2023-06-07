@@ -34,9 +34,6 @@ export default function Home() {
         fetchNotes()
         setInput("");
       }
-      //  setNotes([...notes, input]);
-      //  console.log(notes)
-      
     } catch (error) {
       console.log(error);
     } finally {

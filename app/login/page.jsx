@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-const login = () => {
+const Login = () => {
   const email = useRef(null)
   const password = useRef(null)
   const handleSubmit = async(e) =>{
@@ -52,4 +52,4 @@ const login = () => {
   );
 }
 
-export default login
+export default Login

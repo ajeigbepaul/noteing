@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import ClipLoader from "react-spinners/ClipLoader";
 
-function page() {
+function Edit() {
   const [note, setNote] = useState({});
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -81,4 +81,4 @@ function page() {
   );
 }
 
-export default page;
+export default Edit;
