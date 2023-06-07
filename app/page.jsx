@@ -54,18 +54,17 @@ export default function Home() {
       {notes.length === 0 && <span className="px-10">No Note in the database</span>}
       <div className="w-full overflow-x-scroll scrollbar-track-gray-400/20 scrollbar-thumb-[#FF00FF]/80 scrollbar-thin h-screen snap-x snap-mandatory bg-white max-h-[350px] flex space-x-2">
         {notes.map((note) =>
-          notes.length > 0 ? (
             <NoteFeed
               key={note._id}
               note={note}
               setNotes={setNotes}
               notes={notes}
             />
-          ) : (
-            <span className="bg-red-400">
-              {notes.length === 0 && "No Note in the database"}
-            </span>
-          )
+          
+            // <span className="bg-red-400">
+            //   {notes.length === 0 && "No Note in the database"}
+            // </span>
+          
         )}
       </div>
       <div className="w-full max-w-3xl mx-auto bg-fuchsia-500 shadow-lg flex items-center rounded-lg mt-4">
