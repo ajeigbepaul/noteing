@@ -44,6 +44,7 @@ export default function Home() {
     const response = await fetch("/api/note");
     const data = await response.json();
     setNotes(data);
+    console.log(data)
   };
   useEffect(() => {
     
