@@ -61,16 +61,6 @@ const Navigation = () => {
           >
             Google
           </span>
-          {/* {providers &&
-            Object.values(providers).map((provider) => (
-              <span
-                key={provider.name}
-                className="text-sm px-2 bg-white rounded-md py-2"
-                onClick={() => signIn(provider.id)}
-              >
-                {provider?.name}
-              </span>
-            ))} */}
         </div>
       )}
     </nav>
