@@ -4,56 +4,73 @@ import { BsSendCheck } from "react-icons/bs";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useSession } from "next-auth/react";
 import NoteFeed from "../components/NoteFeed";
+import {toast} from 'react-hot-toast'
+import { useRouter } from "next/navigation";
 export default function Home() {
   const { data: session } = useSession();
+  const id = session?.user?.id
   const [submitting, setSubmitting] = useState(false);
+  const router = useRouter()
   const override = {
     display: "block",
     margin: "0 auto",
   };
   const [notes, setNotes] = useState([]);
-  const [initialUi, setInitialUi] = useState([]);
   const [input, setInput] = useState("");
   const handleChange = (e) => {
     setInput(e.target.value);
   };
+  
   const handleNote = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     console.log(input)
-    try {
-      const response = await fetch("/api/note/new", {
-        method: "POST",
-        body: JSON.stringify({
-          input: input,
-          userId: session?.user.id,
-        }),
-      });
-      if (response.ok) {
-        // Change this to hot toast.
-        console.log("note created!!!");
-        fetchNotes()
-        setInput("");
+    if (!session?.user) {
+      toast.error('You need to login to keep your written note')
+      router.push('/login')
+      // setSubmitting(false)
+    }else{
+
+      try {
+        const response = await fetch("/api/note/new", {
+          method: "POST",
+          body: JSON.stringify({
+            input: input,
+            userId: session?.user.id,
+          }),
+        });
+        if (response.ok) {
+          toast.success('note created!!')
+          fetchNotes()
+          setInput("");
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setSubmitting(false);
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setSubmitting(false);
     }
   };
   const fetchNotes = async () => {
-    const response = await fetch("/api/note");
-    const data = await response.json();
-    setNotes(data);
-    console.log(data)
+    try {
+      setSubmitting(true);
+      const response = await fetch(`/api/note/usernote/${id}`);
+      const data = await response.json();
+      setNotes(data);
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setSubmitting(false)
+    }
+    
   };
   useEffect(() => {
     
     fetchNotes();
-  }, []);
+  }, [id]);
   return (
     <main className="h-screen py-4 bg-gradient-to-br from-[#E6E6FA] to bg-white flex flex-col overflow-x-hidden">
-      {notes.length === 0 && <span className="px-10">No Note in the database</span>}
+      {submitting && <span className="px-10">Note loading...</span>}
       <div className="w-full overflow-x-scroll scrollbar-track-gray-400/20 scrollbar-thumb-[#FF00FF]/80 scrollbar-thin h-screen snap-x snap-mandatory bg-white max-h-[350px] flex space-x-2">
         {notes.map((note) =>
             <NoteFeed

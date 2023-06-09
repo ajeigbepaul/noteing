@@ -7,6 +7,7 @@ import {signIn, signOut, useSession, getProviders} from 'next-auth/react'
 import Link from "next/link";
 const Navigation = () => {
     const {data:session} = useSession()
+    console.log(session?.user?.id)
     const [providers, setProviders] = useState(null)
     useEffect(()=>{
      const setProvider = async()=>{
@@ -35,7 +36,7 @@ const Navigation = () => {
               />
             </div>
           ) : (
-            <span>{session?.user?.email}</span>
+            <span className="text-xs">{session?.user?.email}</span>
           )}
 
           <div

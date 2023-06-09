@@ -3,6 +3,7 @@ import Note from "../../../../models/note";
 // GET
 // @read the data
 export const GET = async (req,{params}) => {
+  console.log(params.id)
   try {
     await connectToDB();
     const note = await Note.findById(params.id).populate("creator");

@@ -2,6 +2,7 @@ import { connectToDB } from "../../../utils/database";
 import Note from "../../../models/note";
 
 export const GET = async (req) => {
+ 
   try {
     await connectToDB();
     const notes = await Note.find({}).populate("creator");

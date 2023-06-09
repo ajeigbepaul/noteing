@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import ClipLoader from "react-spinners/ClipLoader";
-
+import {toast} from 'react-hot-toast'
 function Edit() {
   const [note, setNote] = useState({});
   const searchParams = useSearchParams();
@@ -39,8 +39,8 @@ function Edit() {
         })
     });
     if(response.ok){
-        console.log("note Updated")
         router.push('/')
+        toast.success("note update");
     }
     
   } catch (error) {
