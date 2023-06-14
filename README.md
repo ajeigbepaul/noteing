@@ -17,7 +17,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
+## Project Name
+Noteing Application.
+This is an application that was created with the mind of helping users capture there thoughts, ideas, and other
+things that they may likely need to remember later on.
+The link assocaited with this project are:
+[`Github`](https://github.com/ajeigbepaul/noteing)
+[`Note-ing`](https://noteing.netlify.app/)
+[`LinkedIn`](https://www.linkedin.com/in/paul-ajeigbe/)
+[`Blog`](https://www.linkedin.com/pulse/noteing-paul-ajeigbe)
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
